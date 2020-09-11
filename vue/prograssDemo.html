@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8" />
+<meta name="viewport" content=" initial-scale=1.0,user-scalable=no" />
+<title>菜鸟教程(runoob.com)</title> 
+</head>
+<body>
+<script type="text/javascript">
+	function ButtonClick(){
+		if(document.getElementById("pro1").value < 100){
+			document.getElementById("pro1").value += 1;
+		}else
+		{
+			document.getElementById("pro1").value = 1;
+		}
+		
+	}
+</script>
+下载进度：
+<progress id="pro1" value="33" max="100">
+</progress>
+
+<p><strong>注意：</strong> IE 9 或者更早版本的 IE 浏览器不支持 progress 标签。</p>
+<button onclick="ButtonClick()">add one</button>
+	
+</body>
+</html>

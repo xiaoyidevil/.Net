@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content=" initial-scale=1.0,user-scalable=no" />
+<meta http-equiv = "X-UA-Compatible" content = "IE=edge, chrome=1" />
+<meta name="viewport" content="initial-scale=1.0,width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="Description" content=""/>
+<meta name="keywords" content=""/>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+
+<audio autoplay controls loop>
+  <source src="mp3/horse.ogg" type="audio/ogg">
+  <source src="mp3/horse.mp3" type="audio/mpeg">
+  您的浏览器不支持 audio 元素。
+</audio>
+<div id="app">
+  {{ message }}
+</div>
+
+<div id="app2">
+  <span v-bind:title="currentTime">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+  </span>
+</div>
+
+<div id="app3">
+	<span title="helloworld">
+		<p v-if="seen">test</p>
+	</span>
+</div>
+<div id='app4'>
+	<ol>
+		<li v-for="todo in todos">
+		{{ todo.value }}
+		<li>
+	</ol>
+</div>
+<div id='app5'>
+	<p>{{messagexx}}</p>
+	<button v-on:click='reverseMessage'>反转消息</button>
+</div>
+<div id="app-6">
+	<p>{{messageyy}}</p>
+	<input v-model="messageyy" />
+</div>
+
+<div id='app-7'>
+<ol>
+	<todo-item
+		v-for="item in groceryList"
+		v-bind:todo="item"
+		v-bind:key = 'item.id'
+		v-bind:testp="item.vtitle"
+	/>
+</ol>
+</div>
+<div id="app-8">
+	<p>{{ foo }}</p>
+	<button v-on:click="foo = 'baz'"> Change IT</button>
+</div>
+
+</p>
+<div>
+<anchored-heading :level="1">Hello world!</anchored-heading>
+</div>
+
+
+<div id="app-9">
+<ul v-if="items.length">
+  <li v-for="item in items">{{ item.name }}</li>
+</ul>
+<p v-else>No items found.</p>
+</div>
+<script>
+	var app9 = new Vue({
+		el:"#app-9",
+		data:{items:[
+			{name:"1234"},
+			{name:"asdf"},
+			{name:"2345"}
+		]
+		}
+	})
+</script>
+
+
+<script type="text/x-template" id="anchored-heading-template">
+  <h1 v-if="level === 1">
+    <slot></slot>
+  </h1>
+  <h2 v-else-if="level === 2">
+    <slot></slot>
+  </h2>
+  <h3 v-else-if="level === 3">
+    <slot></slot>
+  </h3>
+  <h4 v-else-if="level === 4">
+    <slot></slot>
+  </h4>
+  <h5 v-else-if="level === 5">
+    <slot></slot>
+  </h5>
+  <h6 v-else-if="level === 6">
+    <slot></slot>
+  </h6>
+</script>
+
+<script>
+  
+Vue.component('anchored-heading', {
+  render: function (createElement) {
+    return createElement(
+      'h' + this.level,   // 标签名称
+      this.$slots.default // 子节点数组
+    )
+  },
+  props: {
+    level: {
+      type: Number,
+      required: true
+    }
+  }
+})
+  
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!'
+      }
+    })
+  </script>	
+  <script>
+var app2 = new Vue({
+  el: '#app2',
+  data: {
+    currentTime: '页面加载于 ' + new Date().toLocaleString()
+  }
+})
+
+var app3 = new Vue({
+	el: '#app3',
+	data:{
+		seen: true
+	}
+})
+var app4 = new Vue({
+	el: '#app4',
+	data:{
+		todos:[
+			{value: 'learn javascript'},
+			{value: 'learn vue'},
+			{value: 'learn all great project'},
+			{value: 'test'}]
+	}
+})
+
+var app5 = new Vue({
+	el:'#app5',
+	data:{
+		messagexx: 'hello world'
+	},
+	methods:{
+		reverseMessage: function(){
+			this.messagexx = this.messagexx.split('').reverse().join('')
+		}
+	}
+})
+
+var app6 = new Vue({
+	el: '#app-6',
+	data:{
+		messageyy:'hello vue'
+	}
+})
+
+Vue.component('todo-item',{
+	props:['todo','testp'],
+	template:'<li v-bind:title=testp>{{ todo.text }}</li>'
+})
+
+var app7 = new Vue({
+	el: '#app-7',
+	data:{
+		groceryList:[
+			{id:0, text:'蔬菜',vtitle:'vegetable'},
+			{id:1, text:'水果',vtitle:'fruit'},
+			{id:2, text:'肉类',vtitle:'meat'}
+		]
+	}
+})
+
+var obj = {
+	foo:'bar'
+}
+
+//Object.freeze(obj)
+//Object.unfreeze(obj)
+
+var app8 = new Vue({
+	el:'#app-8',
+	data:obj
+})
+
+
+
+  </script>
+</body>
+</html>

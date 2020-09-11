@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8" />
+<meta name="viewport" content=" initial-scale=1.0,user-scalable=no" />
+<title>菜鸟教程(runoob.com)</title> 
+<script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+<div class="phone" @touchstart="phone_mouseS" @touchend="phone_mouseE">
+<Carousel :autoplay-speed="5000" v-model="phone_mouseMIndex" autoplay :value="0" loop v-if="menuChoose == '/'">
+ <CarouselItem>
+ <img class="img" src="../images/1.png" />
+ </CarouselItem>
+ <CarouselItem>
+ <img class="img" src="../images/1.png" />
+ </CarouselItem>
+ <CarouselItem>
+ <img class="img" src="../images/3.png" />
+ </CarouselItem>
+</Carousel>
+</div>
+
+<script type="text/javascript">
+data() {
+	return 
+	{
+		 phone_mouseMIndex: 0, // phone端 滑动索引
+		 phone_mouseMX0: 0, // phone端 滑动索引
+		 phone_mouseMX1: 0 // phone端 滑动索引
+	}
+},
+// phone端 滑动开始
+phone_mouseS(e)
+{
+	this.phone_mouseMX0 = e.changedTouches[0].pageX;
+},
+// phone端 滑动结束
+phone_mouseE(e)
+{
+	 this.phone_mouseMX1 = e.changedTouches[0].pageX;
+	 let tag = this.phone_mouseMX1 - this.phone_mouseMX0;
+	 if(tag >= 50)
+	 {
+		 if(this.phone_mouseMIndex > 0){
+			this.phone_mouseMIndex--;
+		 }else
+		 {
+			this.phone_mouseMIndex = 2;
+		 }
+	 }
+	 if(tag <= -50)
+	 {
+		 if(this.phone_mouseMIndex < 2)
+		 {
+			this.phone_mouseMIndex++;
+		 }else{
+			this.phone_mouseMIndex = 0;
+		 }
+	 }
+}
+</script>	
+</body>
+</html>
